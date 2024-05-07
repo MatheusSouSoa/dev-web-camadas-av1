@@ -29,7 +29,7 @@ export function EditBudgetDialog({
   const [budget, setBudget] = useState<Budget | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/budgets/${id}`)
+    fetch(`http://localhost:8080/api-v1-0/orcamentos/${id}`)
       .then((response) => response.json())
       .then((data) => setBudget(data));
   }, [open]);
@@ -43,9 +43,9 @@ export function EditBudgetDialog({
       {budget && (
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Editar Projeto</DialogTitle>
+            <DialogTitle>Editar Orçamento</DialogTitle>
             <DialogDescription>
-              Faça alterações em seu projeto aqui. Clique em salvar quando
+              Faça alterações em seu orçamento aqui. Clique em salvar quando
               terminar.
             </DialogDescription>
           </DialogHeader>
@@ -75,7 +75,7 @@ export function EditBudgetDialog({
             <div className="flex flex-col gap-2">
               <Label htmlFor="company">Empresa</Label>
               <Input
-                defaultValue={budget.company}
+                defaultValue={budget.nome_empresa}
                 id="company"
                 name="company"
               />
@@ -84,7 +84,7 @@ export function EditBudgetDialog({
             <div className="flex flex-col gap-2">
               <Label htmlFor="value">Valor</Label>
               <Input
-                defaultValue={budget.value}
+                defaultValue={budget.valor}
                 type="number"
                 id="value"
                 name="value"
@@ -94,7 +94,7 @@ export function EditBudgetDialog({
             <div className="flex flex-col gap-2">
               <Label htmlFor="description">Descrição</Label>
               <Textarea
-                defaultValue={budget.description}
+                defaultValue={budget.descricao}
                 id="description"
                 name="description"
               />
@@ -103,7 +103,7 @@ export function EditBudgetDialog({
             <div className="flex flex-col gap-2">
               <Label htmlFor="startDate">Status</Label>
               <Select
-                defaultValue={budget.status}
+                defaultValue={budget.status_pagamento}
                 placeholder="Status"
                 name="status"
                 options={[

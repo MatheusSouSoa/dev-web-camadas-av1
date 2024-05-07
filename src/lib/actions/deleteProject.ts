@@ -6,7 +6,7 @@ export async function deleteProject(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/projects");
 
-  await fetch(`http://localhost:3000/api/projects/${formData.get("id")}`, {
+  await fetch(`http://localhost:8080/api-v1-0/projetos/${formData.get("id")}`, {
     method: "DELETE",
   });
 

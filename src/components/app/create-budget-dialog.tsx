@@ -2,7 +2,6 @@
 
 import { Select } from "@/components/app/select";
 import { SubmitButton } from "@/components/app/submit-button";
-import { DatePicker } from "@/components/ui/date-picker";
 import {
   Dialog,
   DialogContent,
@@ -22,7 +21,7 @@ export function CreateBudgetDialog({ children }: { children: ReactNode }) {
   const [projects, setProjects] = useState<Array<Project> | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/projects`)
+    fetch(`http://localhost:8080/api-v1-0/projetos`)
       .then((response) => response.json())
       .then((data) => setProjects(data));
   }, [open]);
@@ -35,7 +34,7 @@ export function CreateBudgetDialog({ children }: { children: ReactNode }) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Novo Projeto</DialogTitle>
+          <DialogTitle>Novo Orçamento</DialogTitle>
         </DialogHeader>
 
         <form
@@ -53,8 +52,8 @@ export function CreateBudgetDialog({ children }: { children: ReactNode }) {
                 name="project"
                 options={projects.map((item) => {
                   return {
-                    label: item.name,
-                    value: item.id,
+                    label: item.nome,
+                    value: item.codigo,
                   };
                 })}
               />
@@ -103,7 +102,7 @@ export function CreateBudgetDialog({ children }: { children: ReactNode }) {
               ]}
             />
           </div>
-          <SubmitButton>Cadastrar Projeto</SubmitButton>
+          <SubmitButton>Cadastrar Orçamento</SubmitButton>
         </form>
       </DialogContent>
     </Dialog>

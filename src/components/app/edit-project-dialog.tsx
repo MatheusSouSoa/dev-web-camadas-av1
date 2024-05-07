@@ -29,7 +29,7 @@ export function EditProjectDialog({
   const [project, setProject] = useState<Project | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/projects/${id}`)
+    fetch(`http://localhost:8080/api-v1-0/projetos/${id}`)
       .then((response) => response.json())
       .then((data) => setProject(data));
   }, [open]);
@@ -66,7 +66,7 @@ export function EditProjectDialog({
               <Input
                 id="name"
                 name="name"
-                defaultValue={project?.name}
+                defaultValue={project.nome}
               />
             </div>
 
@@ -74,7 +74,7 @@ export function EditProjectDialog({
               <Label htmlFor="startDate">Data de início</Label>
               <DatePicker
                 name="startDate"
-                defaultValue={project?.startDate}
+                defaultValue={project?.data_inicio}
               />
             </div>
 
@@ -82,14 +82,14 @@ export function EditProjectDialog({
               <Label htmlFor="startDate">Data de término</Label>
               <DatePicker
                 name="endDate"
-                defaultValue={project?.endDate}
+                defaultValue={project.data_termino}
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <Label htmlFor="description">Descrição</Label>
               <Textarea
-                defaultValue={project?.description}
+                defaultValue={project.descricao}
                 id="description"
                 name="description"
               />

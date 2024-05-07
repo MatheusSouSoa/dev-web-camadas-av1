@@ -20,11 +20,11 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const projects: Array<Project> = await (
-    await fetch("http://localhost:3000/api/projects")
+    await fetch("http://localhost:8080/api-v1-0/projetos")
   ).json();
 
   const budgets: Array<Budget> = await (
-    await fetch("http://localhost:3000/api/budgets")
+    await fetch("http://localhost:8080/api-v1-0/orcamentos")
   ).json();
 
   return (
@@ -58,22 +58,22 @@ export default async function Home() {
             <TableBody>
               {projects
                 .slice(0, 10)
-                .map(({ id, name, startDate, endDate, status }) => (
-                  <TableRow key={name}>
+                .map(({ codigo, nome, data_inicio, data_termino, status }) => (
+                  <TableRow key={codigo}>
                     <TableCell className="font-medium">
                       <Link
                         href=""
                         className="hover:underline underline-offset-2"
                       >
-                        {id}
+                        {codigo}
                       </Link>
                     </TableCell>
-                    <TableCell>{name}</TableCell>
+                    <TableCell>{nome}</TableCell>
                     <TableCell>
-                      {format(startDate, "PPP", { locale: ptBR })}
+                      {format(data_inicio, "PPP", { locale: ptBR })}
                     </TableCell>
                     <TableCell>
-                      {format(endDate, "PPP", { locale: ptBR })}
+                      {format(data_termino, "PPP", { locale: ptBR })}
                     </TableCell>
                     <TableCell>
                       <Badge
@@ -121,31 +121,34 @@ export default async function Home() {
             </TableHeader>
 
             <TableBody>
-              {budgets.slice(0, 10).map(({ id, company, value, status }) => (
-                <TableRow key={id}>
-                  <TableCell className="font-medium">
-                    <Link
-                      href=""
-                      className="hover:underline underline-offset-2"
-                    >
-                      {id}
-                    </Link>
-                  </TableCell>
-                  <TableCell>{company}</TableCell>
-                  <TableCell>{value}</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        status == "Pendente" || status == "Pausado"
-                          ? "destructive"
-                          : "default"
-                      }
-                    >
-                      {status}
-                    </Badge>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {budgets
+                .slice(0, 10)
+                .map(({ codigo, nome_empresa, valor, status_pagamento }) => (
+                  <TableRow key={codigo}>
+                    <TableCell className="font-medium">
+                      <Link
+                        href=""
+                        className="hover:underline underline-offset-2"
+                      >
+                        {codigo}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{nome_empresa}</TableCell>
+                    <TableCell>{valor}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          status_pagamento == "Pendente" ||
+                          status_pagamento == "Pausado"
+                            ? "destructive"
+                            : "default"
+                        }
+                      >
+                        {status_pagamento}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </ScrollArea>

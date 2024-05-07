@@ -24,7 +24,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Projects() {
   const projects: Array<Project> = await (
-    await fetch("http://localhost:3000/api/projects")
+    await fetch("http://localhost:8080/api-v1-0/projetos")
   ).json();
 
   return (
@@ -53,55 +53,57 @@ export default async function Projects() {
             </TableHeader>
 
             <TableBody>
-              {projects.map(({ id, name, startDate, endDate, status }) => (
-                <TableRow key={id}>
-                  <TableCell className="font-medium">
-                    <Link
-                      href=""
-                      className="hover:underline underline-offset-2"
-                    >
-                      {id}
-                    </Link>
-                  </TableCell>
-                  <TableCell>{name}</TableCell>
-                  <TableCell>
-                    {format(startDate, "PPP", { locale: ptBR })}
-                  </TableCell>
-                  <TableCell>
-                    {format(endDate, "PPP", { locale: ptBR })}
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        status == "Pendente" || status == "Pausado"
-                          ? "destructive"
-                          : "default"
-                      }
-                    >
-                      {status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="flex gap-4">
-                    <EditProjectDialog id={id}>
-                      <Button
-                        variant="secondary"
-                        className="px-0 aspect-square"
+              {projects.map(
+                ({ codigo, nome, data_inicio, data_termino, status }) => (
+                  <TableRow key={codigo}>
+                    <TableCell className="font-medium">
+                      <Link
+                        href=""
+                        className="hover:underline underline-offset-2"
                       >
-                        <Pencil className="w-5 h-5" />
-                      </Button>
-                    </EditProjectDialog>
+                        {codigo}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{nome}</TableCell>
+                    <TableCell>
+                      {format(data_inicio, "PPP", { locale: ptBR })}
+                    </TableCell>
+                    <TableCell>
+                      {format(data_termino, "PPP", { locale: ptBR })}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          status == "Pendente" || status == "Pausado"
+                            ? "destructive"
+                            : "default"
+                        }
+                      >
+                        {status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="flex gap-4">
+                      <EditProjectDialog id={codigo}>
+                        <Button
+                          variant="secondary"
+                          className="px-0 aspect-square"
+                        >
+                          <Pencil className="w-5 h-5" />
+                        </Button>
+                      </EditProjectDialog>
 
-                    <DeleteProjectDialog id={id}>
-                      <Button
-                        variant="destructive"
-                        className="px-0 aspect-square"
-                      >
-                        <Trash className="w-5 h-5" />
-                      </Button>
-                    </DeleteProjectDialog>
-                  </TableCell>
-                </TableRow>
-              ))}
+                      <DeleteProjectDialog id={codigo}>
+                        <Button
+                          variant="destructive"
+                          className="px-0 aspect-square"
+                        >
+                          <Trash className="w-5 h-5" />
+                        </Button>
+                      </DeleteProjectDialog>
+                    </TableCell>
+                  </TableRow>
+                )
+              )}
             </TableBody>
           </Table>
         </ScrollArea>

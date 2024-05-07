@@ -21,7 +21,7 @@ import { CreateBudgetDialog } from "@/components/app/create-budget-dialog";
 
 export default async function Budgets() {
   const budgets: Array<Budget> = await (
-    await fetch("http://localhost:3000/api/budgets")
+    await fetch("http://localhost:8080/api-v1-0/orcamentos")
   ).json();
 
   return (
@@ -50,50 +50,53 @@ export default async function Budgets() {
             </TableHeader>
 
             <TableBody>
-              {budgets.map(({ id, company, value, status }) => (
-                <TableRow key={id}>
-                  <TableCell className="font-medium">
-                    <Link
-                      href=""
-                      className="hover:underline underline-offset-2"
-                    >
-                      {id}
-                    </Link>
-                  </TableCell>
-                  <TableCell>{company}</TableCell>
-                  <TableCell>{value}</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        status == "Pendente" || status == "Pausado"
-                          ? "destructive"
-                          : "default"
-                      }
-                    >
-                      {status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="flex gap-4">
-                    <EditBudgetDialog id={id}>
-                      <Button
-                        variant="secondary"
-                        className="px-0 aspect-square"
+              {budgets.map(
+                ({ codigo, nome_empresa, valor, status_pagamento }) => (
+                  <TableRow key={codigo}>
+                    <TableCell className="font-medium">
+                      <Link
+                        href=""
+                        className="hover:underline underline-offset-2"
                       >
-                        <Pencil className="w-5 h-5" />
-                      </Button>
-                    </EditBudgetDialog>
+                        {codigo}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{nome_empresa}</TableCell>
+                    <TableCell>{valor}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          status_pagamento == "Pendente" ||
+                          status_pagamento == "Pausado"
+                            ? "destructive"
+                            : "default"
+                        }
+                      >
+                        {status_pagamento}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="flex gap-4">
+                      <EditBudgetDialog id={codigo}>
+                        <Button
+                          variant="secondary"
+                          className="px-0 aspect-square"
+                        >
+                          <Pencil className="w-5 h-5" />
+                        </Button>
+                      </EditBudgetDialog>
 
-                    <DeleteBudgetDialog id={id}>
-                      <Button
-                        variant="destructive"
-                        className="px-0 aspect-square"
-                      >
-                        <Trash className="w-5 h-5" />
-                      </Button>
-                    </DeleteBudgetDialog>
-                  </TableCell>
-                </TableRow>
-              ))}
+                      <DeleteBudgetDialog id={codigo}>
+                        <Button
+                          variant="destructive"
+                          className="px-0 aspect-square"
+                        >
+                          <Trash className="w-5 h-5" />
+                        </Button>
+                      </DeleteBudgetDialog>
+                    </TableCell>
+                  </TableRow>
+                )
+              )}
             </TableBody>
           </Table>
         </ScrollArea>

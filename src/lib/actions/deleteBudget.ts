@@ -6,7 +6,7 @@ export async function deleteBudget(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/budgets");
 
-  await fetch(`http://localhost:3000/api/budgets/${formData.get("id")}`, {
+  await fetch(`http://localhost:8080/api-v1-0/orcamentos/${formData.get("id")}`, {
     method: "DELETE",
   });
 

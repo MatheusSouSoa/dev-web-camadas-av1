@@ -1,8 +1,8 @@
 export interface Project {
-  id: string;
-  name: string;
-  startDate: string;
-  endDate: string;
+  codigo: string;
+  nome: string;
+  data_inicio: string;
+  data_termino: string;
   status: string;
-  description: string;
+  descricao: string;
 }

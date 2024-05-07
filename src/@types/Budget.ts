@@ -1,7 +1,7 @@
 export interface Budget {
-  id: string;
-  company: string;
-  value: string;
-  status: string;
-  description: string;
+  codigo: string;
+  nome_empresa: string;
+  valor: string;
+  status_pagamento: string;
+  descricao: string;
 }

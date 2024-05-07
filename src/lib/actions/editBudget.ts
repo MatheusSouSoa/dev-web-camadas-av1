@@ -6,10 +6,19 @@ export async function editBudget(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/budgets");
 
-  await fetch(`http://localhost:3000/api/budgets`, {
-    method: "PUT",
-    body: JSON.stringify(Object.fromEntries(formData)),
-  });
+  await fetch(
+    `http://localhost:8080/api-v1-0/orcamentos/${formData.get("id")}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nome_empresa: formData.get("company"),
+        valor: formData.get("value"),
+        descricao: formData.get("description"),
+        status_pagamento: formData.get("status"),
+      }),
+    }
+  );
 
   return true;
 }
