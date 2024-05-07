@@ -53,7 +53,7 @@ export function CreateBudgetDialog({ children }: { children: ReactNode }) {
                 options={projects.map((item) => {
                   return {
                     label: item.nome,
-                    value: item.codigo,
+                    value: item.codigo.toString(),
                   };
                 })}
               />
