@@ -5,4 +5,5 @@ export interface Project {
   data_termino: string;
   status: string;
   descricao: string;
+  codigo_orcamento?: string;
 }

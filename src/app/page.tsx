@@ -49,6 +49,7 @@ export default async function Home() {
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
+                <TableHead>Orçamento</TableHead>
                 <TableHead>Nome</TableHead>
                 <TableHead>Data de início</TableHead>
                 <TableHead>Data de término</TableHead>
@@ -58,36 +59,53 @@ export default async function Home() {
             <TableBody>
               {projects
                 .slice(0, 10)
-                .map(({ codigo, nome, data_inicio, data_termino, status }) => (
-                  <TableRow key={codigo}>
-                    <TableCell className="font-medium">
-                      <Link
-                        href=""
-                        className="hover:underline underline-offset-2"
-                      >
-                        {codigo}
-                      </Link>
-                    </TableCell>
-                    <TableCell>{nome}</TableCell>
-                    <TableCell>
-                      {format(data_inicio, "PPP", { locale: ptBR })}
-                    </TableCell>
-                    <TableCell>
-                      {format(data_termino, "PPP", { locale: ptBR })}
-                    </TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={
-                          status == "Pendente" || status == "Pausado"
-                            ? "destructive"
-                            : "default"
-                        }
-                      >
-                        {status}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                .map(
+                  ({
+                    codigo,
+                    nome,
+                    data_inicio,
+                    data_termino,
+                    status,
+                    codigo_orcamento,
+                  }) => (
+                    <TableRow key={codigo}>
+                      <TableCell className="font-medium">
+                        <Link
+                          href=""
+                          className="hover:underline underline-offset-2"
+                        >
+                          {codigo}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          href=""
+                          className="hover:underline underline-offset-2"
+                        >
+                          {codigo_orcamento}
+                        </Link>
+                      </TableCell>
+                      <TableCell>{nome}</TableCell>
+                      <TableCell>
+                        {format(data_inicio, "PPP", { locale: ptBR })}
+                      </TableCell>
+                      <TableCell>
+                        {format(data_termino, "PPP", { locale: ptBR })}
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            status == "Pendente" || status == "Pausado"
+                              ? "destructive"
+                              : "default"
+                          }
+                        >
+                          {status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  )
+                )}
             </TableBody>
           </Table>
         </ScrollArea>

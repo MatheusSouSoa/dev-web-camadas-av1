@@ -45,6 +45,7 @@ export default async function Projects() {
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
+                <TableHead>Orçamento</TableHead>
                 <TableHead>Nome</TableHead>
                 <TableHead>Data de início</TableHead>
                 <TableHead>Data de término</TableHead>
@@ -54,7 +55,14 @@ export default async function Projects() {
 
             <TableBody>
               {projects.map(
-                ({ codigo, nome, data_inicio, data_termino, status }) => (
+                ({
+                  codigo,
+                  nome,
+                  data_inicio,
+                  data_termino,
+                  status,
+                  codigo_orcamento,
+                }) => (
                   <TableRow key={codigo}>
                     <TableCell className="font-medium">
                       <Link
@@ -62,6 +70,14 @@ export default async function Projects() {
                         className="hover:underline underline-offset-2"
                       >
                         {codigo}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Link
+                        href=""
+                        className="hover:underline underline-offset-2"
+                      >
+                        {codigo_orcamento}
                       </Link>
                     </TableCell>
                     <TableCell>{nome}</TableCell>

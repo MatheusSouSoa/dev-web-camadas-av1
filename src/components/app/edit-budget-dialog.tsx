@@ -63,16 +63,6 @@ export function EditBudgetDialog({
             />
 
             <div className="flex flex-col gap-2">
-              <Label htmlFor="startDate">Projeto</Label>
-              <Select
-                placeholder="Projeto"
-                defaultValue="Projeto"
-                name="project"
-                options={[]}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
               <Label htmlFor="company">Empresa</Label>
               <Input
                 defaultValue={budget.nome_empresa}

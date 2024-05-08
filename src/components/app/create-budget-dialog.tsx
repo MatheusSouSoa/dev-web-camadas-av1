@@ -50,12 +50,14 @@ export function CreateBudgetDialog({ children }: { children: ReactNode }) {
               <Select
                 placeholder="Projeto"
                 name="project"
-                options={projects.map((item) => {
-                  return {
-                    label: item.nome,
-                    value: item.codigo.toString(),
-                  };
-                })}
+                options={projects
+                  .filter((item) => !item.codigo_orcamento)
+                  .map((item) => {
+                    return {
+                      label: item.nome,
+                      value: item.codigo.toString(),
+                    };
+                  })}
               />
             )}
           </div>
